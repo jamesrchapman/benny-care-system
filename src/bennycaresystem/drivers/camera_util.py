@@ -12,7 +12,7 @@ def capture_snapshot() -> str:
     out_path = f"/tmp/snapshot_{ts}.jpg"
 
     cmd = [
-        "libcamera-still",
+        "/usr/bin/rpicam-still",
         "-n",              # no preview
         "-t", "1",         # minimal capture time
         "-o", out_path
