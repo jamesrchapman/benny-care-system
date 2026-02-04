@@ -10,14 +10,18 @@ StartLimitBurst=3
 [Service]
 Type=simple
 User=james
-WorkingDirectory=/home/james/benny-care-system
+WorkingDirectory=/home/james/benny-care-system/src
 EnvironmentFile=/home/james/benny-care-system/.env
 
-ExecStart=/home/james/benny-care-system/.venv/bin/python /home/james/benny-care-system/src/bennycaresystem/app/latest.py
+ExecStart=/home/james/benny-care-system/.venv/bin/python -m bennycaresystem.app.latest.py
 
 # restart policy:
 Restart=on-failure
 RestartSec=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
