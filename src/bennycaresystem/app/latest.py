@@ -3,7 +3,6 @@ import asyncio
 import discord
 from discord import app_commands
 from dotenv import load_dotenv
-from drivers.camera_util import capture_snapshot
 
 
 # ---- load env ----
@@ -14,7 +13,8 @@ if not BOT_TOKEN:
     raise RuntimeError("DISCORD_BOT_TOKEN not set")
 
 # ---- import hardware action ----
-from drivers.servo_util import servo_rotate_once
+from bennycaresystem.drivers.servo_util import servo_rotate_once
+from bennycaresystem.drivers.camera_util import capture_snapshot
 
 # ---- discord setup ----
 intents = discord.Intents.default()
