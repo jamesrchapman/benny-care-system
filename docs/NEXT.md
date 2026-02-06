@@ -2,15 +2,11 @@
 
 ## Now (pick 1)
 
-
-
 ## Next (up to ~10)
 
-Mounting Food Gutter
-How am I going to get an image from the pi to my... watch?
+Mount the Pi and Camera so the Camera can see the food zone but the wires reach and nobody's gonna trample the Box
+Pi to watch image snapshot viewing
 
 ## Blocked
 
 ## Materials
-
-- Try a Two-State Bidirectional Solenoid (not a push pull)
