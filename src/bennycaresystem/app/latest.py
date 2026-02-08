@@ -3,7 +3,7 @@ import asyncio
 import discord
 from discord import app_commands
 from dotenv import load_dotenv
-
+import traceback
 
 # ---- load env ----
 load_dotenv()
@@ -46,7 +46,10 @@ async def on_message(message: discord.Message):
             try:
                 path = await loop.run_in_executor(None, capture_snapshot)
             except Exception as e:
-                await message.channel.send(f"📷 snapshot error: {type(e).__name__}: {e}")
+                traceback.print_exc()   # 👈 THIS is the missing piece
+                await message.channel.send(
+                    f"📷 snapshot error: {type(e).__name__}: {e}"
+                )
                 return
 
         try:
@@ -106,6 +109,7 @@ async def snapshot_cmd(interaction: discord.Interaction):
         except Exception as e:
             await interaction.followup.send(f"📷 snapshot error: {type(e).__name__}: {e}")
             return
+        
 
     try:
         await interaction.followup.send(
