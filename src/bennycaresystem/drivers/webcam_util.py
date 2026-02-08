@@ -5,7 +5,7 @@ from datetime import datetime
 WEBCAM_DEVICE = "/dev/video0"
 FFMPEG = "/usr/bin/ffmpeg"
 
-def capture_snapshot_usb() -> str:
+def capture_snapshot() -> str:
     """
     Captures a single image from a USB webcam using ffmpeg (V4L2).
     Returns the file path.
