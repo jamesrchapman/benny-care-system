@@ -14,7 +14,7 @@ if not BOT_TOKEN:
 
 # ---- import hardware action ----
 from bennycaresystem.drivers.servo_util import servo_rotate_once
-from bennycaresystem.drivers.camera_util import capture_snapshot
+from bennycaresystem.drivers.webcam_util import capture_snapshot
 
 # ---- discord setup ----
 intents = discord.Intents.default()
