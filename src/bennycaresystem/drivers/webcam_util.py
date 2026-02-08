@@ -1,6 +1,8 @@
 import subprocess
 import os
 from datetime import datetime
+import uuid
+
 
 WEBCAM_DEVICE = "/dev/video0"
 FFMPEG = "/usr/bin/ffmpeg"
@@ -12,7 +14,7 @@ def capture_snapshot() -> str:
     Raises RuntimeError on failure.
     """
     ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    out_path = f"/tmp/snapshot_{ts}.jpg"
+    out_path = f"/tmp/snapshot_{ts}_{uuid.uuid4().hex}.jpg"
 
     cmd = [
         FFMPEG,
