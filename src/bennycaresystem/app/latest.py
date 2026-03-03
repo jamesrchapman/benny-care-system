@@ -15,6 +15,8 @@ if not BOT_TOKEN:
 # ---- import hardware action ----
 from bennycaresystem.drivers.servo_util import servo_rotate_once
 from bennycaresystem.drivers.webcam_util import capture_snapshot
+from bennycaresystem.drivers.honey_driver import push_honey_ml, retract_seconds
+from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
 
 # ---- discord setup ----
 intents = discord.Intents.default()
@@ -25,6 +27,8 @@ tree = app_commands.CommandTree(bot)
 # ---- prevent overlapping  runs ----
 servo_lock = asyncio.Lock()
 camera_lock = asyncio.Lock()
+honey_lock = asyncio.Lock()
+kibble_lock = asyncio.Lock()
 
 RESCUE_CHANNEL_ID = int(os.getenv("RESCUE_CHANNEL_ID", "0"))  # optional
 
@@ -76,6 +80,69 @@ async def on_message(message: discord.Message):
             await message.channel.send("✅ rescue executed (message trigger)")
         else:
             await message.channel.send("⚠️ rescue reported failure (message trigger)")
+    
+        if content.startswith("!honey"):
+            parts = content.split()
+            if len(parts) != 2:
+                await message.channel.send("usage: !honey <ml>")
+                return
+
+            try:
+                ml = float(parts[1])
+            except ValueError:
+                await message.channel.send("invalid ml value")
+                return
+
+            async with honey_lock:
+                loop = asyncio.get_running_loop()
+                result = await loop.run_in_executor(None, push_honey_ml, ml)
+
+            if result:
+                await message.channel.send(f"🍯 pushed {ml} mL")
+            else:
+                await message.channel.send("⚠️ honey push rejected or failed")
+
+
+        elif content.startswith("!kibble"):
+            parts = content.split()
+            if len(parts) != 2:
+                await message.channel.send("usage: !kibble <bins>")
+                return
+
+            try:
+                bins = int(parts[1])
+            except ValueError:
+                await message.channel.send("invalid bin count")
+                return
+
+            async with kibble_lock:
+                loop = asyncio.get_running_loop()
+                result = await loop.run_in_executor(None, drop_kibble_bins, bins)
+
+            if result:
+                await message.channel.send(f"🥣 dropped {bins} bins")
+            else:
+                await message.channel.send("⚠️ kibble drop failed")
+        elif content.startswith("!retract"):
+            parts = content.split()
+            if len(parts) != 2:
+                await message.channel.send("usage: !retract <seconds>")
+                return
+
+            try:
+                sec = float(parts[1])
+            except ValueError:
+                await message.channel.send("invalid seconds")
+                return
+
+            async with honey_lock:
+                loop = asyncio.get_running_loop()
+                result = await loop.run_in_executor(None, retract_seconds, sec)
+
+            if result:
+                await message.channel.send(f"↩️ retracted for {sec} seconds")
+            else:
+                await message.channel.send("⚠️ retract rejected")
 
 
 # ---- slash command ----
