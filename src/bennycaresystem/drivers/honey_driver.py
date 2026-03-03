@@ -1,9 +1,10 @@
 import time
 import RPi.GPIO as GPIO
 
-HONEY_FWD = 18
-HONEY_REV = 19
-HONEY_EN  = 23
+HONEY_FWD_PWM = 18
+HONEY_FWD_EN  = 23
+HONEY_REV_PWM = 19
+HONEY_REV_EN  = 26
 
 ML_PER_SECOND = 0.35
 MAX_ML_PER_COMMAND = 5.0
@@ -15,46 +16,46 @@ _last_push_time = 0
 
 def _setup():
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(HONEY_FWD, GPIO.OUT, initial=GPIO.LOW)
-    GPIO.setup(HONEY_REV, GPIO.OUT, initial=GPIO.LOW)
-    GPIO.setup(HONEY_EN, GPIO.OUT, initial=GPIO.LOW)
+
+    for pin in (
+        HONEY_FWD_PWM,
+        HONEY_FWD_EN,
+        HONEY_REV_PWM,
+        HONEY_REV_EN,
+    ):
+        GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
 
 
 _setup()
 
 
 def _stop():
-    GPIO.output(HONEY_FWD, GPIO.LOW)
-    GPIO.output(HONEY_REV, GPIO.LOW)
-    GPIO.output(HONEY_EN, GPIO.LOW)
+    GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
+    GPIO.output(HONEY_REV_PWM, GPIO.LOW)
+    GPIO.output(HONEY_FWD_EN, GPIO.LOW)
+    GPIO.output(HONEY_REV_EN, GPIO.LOW)
 
 
-def _run(direction: str, duration: float):
-    if duration <= 0:
-        return False
+def _run_forward(duration: float):
+    GPIO.output(HONEY_REV_EN, GPIO.LOW)
+    GPIO.output(HONEY_REV_PWM, GPIO.LOW)
 
-    try:
-        GPIO.output(HONEY_EN, GPIO.HIGH)
+    GPIO.output(HONEY_FWD_EN, GPIO.HIGH)
+    GPIO.output(HONEY_FWD_PWM, GPIO.HIGH)
 
-        if direction == "forward":
-            GPIO.output(HONEY_REV, GPIO.LOW)
-            GPIO.output(HONEY_FWD, GPIO.HIGH)
+    time.sleep(duration)
+    _stop()
 
-        elif direction == "reverse":
-            GPIO.output(HONEY_FWD, GPIO.LOW)
-            GPIO.output(HONEY_REV, GPIO.HIGH)
 
-        else:
-            _stop()
-            return False
+def _run_reverse(duration: float):
+    GPIO.output(HONEY_FWD_EN, GPIO.LOW)
+    GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
 
-        time.sleep(duration)
-        _stop()
-        return True
+    GPIO.output(HONEY_REV_EN, GPIO.HIGH)
+    GPIO.output(HONEY_REV_PWM, GPIO.HIGH)
 
-    except Exception:
-        _stop()
-        raise
+    time.sleep(duration)
+    _stop()
 
 
 def push_honey_ml(ml: float) -> bool:
@@ -73,16 +74,22 @@ def push_honey_ml(ml: float) -> bool:
     if duration > MAX_DURATION_SECONDS:
         return False
 
-    result = _run("forward", duration)
-
-    if result:
+    try:
+        _run_forward(duration)
         _last_push_time = time.time()
-
-    return result
+        return True
+    except Exception:
+        _stop()
+        raise
 
 
 def retract_seconds(seconds: float) -> bool:
     if seconds <= 0 or seconds > MAX_DURATION_SECONDS:
         return False
 
-    return _run("reverse", seconds)
+    try:
+        _run_reverse(seconds)
+        return True
+    except Exception:
+        _stop()
+        raise
