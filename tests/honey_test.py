@@ -1,6 +1,11 @@
 import time
 import bennycaresystem.drivers.honey_driver as honey
 
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
+
 print("=== Honey actuator direction test ===")
 
 print("Test 1: tiny forward push")
