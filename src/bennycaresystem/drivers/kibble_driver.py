@@ -28,7 +28,6 @@ def drop_kibble_bins(bins: int) -> bool:
 
     return True
 
-
 def _drop_one_bin() -> bool:
     start_state = GPIO.input(KIBBLE_FEEDBACK)
 
