@@ -1,10 +1,11 @@
-import time
-import bennycaresystem.drivers.honey_driver as honey
-
 import sys
 from pathlib import Path
+import time
 
+# add src/ to python path
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
+
+import bennycaresystem.drivers.honey_driver as honey
 
 print("=== Honey actuator direction test ===")
 
