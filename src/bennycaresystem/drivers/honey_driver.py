@@ -4,8 +4,9 @@ import RPi.GPIO as GPIO
 print("=== Honey actuator driver loaded ===")
 
 HONEY_FWD_PWM = 18
-HONEY_FWD_EN  = 23
 HONEY_REV_PWM = 19
+
+HONEY_FWD_EN  = 23
 HONEY_REV_EN  = 26
 
 ML_PER_SECOND = 0.35
@@ -21,11 +22,15 @@ def _setup():
 
     for pin in (
         HONEY_FWD_PWM,
-        HONEY_FWD_EN,
         HONEY_REV_PWM,
+        HONEY_FWD_EN,
         HONEY_REV_EN,
     ):
         GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
+
+    # enable both halves of the bridge permanently
+    GPIO.output(HONEY_FWD_EN, GPIO.HIGH)
+    GPIO.output(HONEY_REV_EN, GPIO.HIGH)
 
 
 _setup()
@@ -34,17 +39,12 @@ _setup()
 def _stop():
     GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
     GPIO.output(HONEY_REV_PWM, GPIO.LOW)
-    GPIO.output(HONEY_FWD_EN, GPIO.LOW)
-    GPIO.output(HONEY_REV_EN, GPIO.LOW)
 
 
 def _run_forward(duration: float):
     print("RUN FORWARD")
 
-    GPIO.output(HONEY_REV_EN, GPIO.LOW)
     GPIO.output(HONEY_REV_PWM, GPIO.LOW)
-
-    GPIO.output(HONEY_FWD_EN, GPIO.HIGH)
     GPIO.output(HONEY_FWD_PWM, GPIO.HIGH)
 
     time.sleep(duration)
@@ -52,10 +52,9 @@ def _run_forward(duration: float):
 
 
 def _run_reverse(duration: float):
-    GPIO.output(HONEY_FWD_EN, GPIO.LOW)
-    GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
+    print("RUN REVERSE")
 
-    GPIO.output(HONEY_REV_EN, GPIO.HIGH)
+    GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
     GPIO.output(HONEY_REV_PWM, GPIO.HIGH)
 
     time.sleep(duration)
