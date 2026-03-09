@@ -1,6 +1,8 @@
 import time
 import RPi.GPIO as GPIO
 
+print("=== Honey actuator driver loaded ===")
+
 HONEY_FWD_PWM = 18
 HONEY_FWD_EN  = 23
 HONEY_REV_PWM = 19
