@@ -39,6 +39,8 @@ def _stop():
 
 
 def _run_forward(duration: float):
+    print("RUN FORWARD")
+
     GPIO.output(HONEY_REV_EN, GPIO.LOW)
     GPIO.output(HONEY_REV_PWM, GPIO.LOW)
 
