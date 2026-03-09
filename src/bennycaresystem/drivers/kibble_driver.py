@@ -7,12 +7,19 @@ KIBBLE_FEEDBACK = 24
 BIN_TIMEOUT_SECONDS = 5
 MAX_BINS_PER_COMMAND = 5
 DEBOUNCE_DELAY = 0.2
+GATE_SETTLE_DELAY = 0.05
 
 
 def _setup():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(KIBBLE_GATE, GPIO.OUT, initial=GPIO.LOW)
+
+    GPIO.setup(KIBBLE_GATE, GPIO.OUT)
     GPIO.setup(KIBBLE_FEEDBACK, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+    # force a known idle state
+    GPIO.output(KIBBLE_GATE, GPIO.LOW)
+    time.sleep(0.05)
 
 
 _setup()
@@ -28,27 +35,32 @@ def drop_kibble_bins(bins: int) -> bool:
 
     return True
 
+
 def _drop_one_bin() -> bool:
     start_state = GPIO.input(KIBBLE_FEEDBACK)
 
-    GPIO.output(KIBBLE_GATE, GPIO.HIGH)
-
     start_time = time.time()
 
-    while True:
-        current = GPIO.input(KIBBLE_FEEDBACK)
+    try:
+        GPIO.output(KIBBLE_GATE, GPIO.HIGH)
 
-        if current != start_state:
-            break
+        while True:
+            current = GPIO.input(KIBBLE_FEEDBACK)
 
-        if time.time() - start_time > BIN_TIMEOUT_SECONDS:
-            GPIO.output(KIBBLE_GATE, GPIO.LOW)
-            return False
+            # detect bin sensor transition
+            if current != start_state:
+                break
 
-        time.sleep(0.01)
+            if time.time() - start_time > BIN_TIMEOUT_SECONDS:
+                return False
 
-    time.sleep(DEBOUNCE_DELAY)
+            time.sleep(0.01)
 
-    GPIO.output(KIBBLE_GATE, GPIO.LOW)
+        # debounce sensor
+        time.sleep(DEBOUNCE_DELAY)
 
-    return True
+        return True
+
+    finally:
+        GPIO.output(KIBBLE_GATE, GPIO.LOW)
+        time.sleep(GATE_SETTLE_DELAY)
