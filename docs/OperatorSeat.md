@@ -1,8 +1,3 @@
-The component list you are forming is already close to what operators typically monitor in small control systems. The useful way to think about it is: **anything that can silently fail or drift should have visible state**.
-
-Your current components fall naturally into several monitoring groups.
-
----
 
 SYSTEM FOUNDATION
 
