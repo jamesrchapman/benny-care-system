@@ -28,7 +28,7 @@ def _setup():
     ):
         GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
 
-    # enable both halves of the bridge permanently
+    # enable both halves of the bridge
     GPIO.output(HONEY_FWD_EN, GPIO.HIGH)
     GPIO.output(HONEY_REV_EN, GPIO.HIGH)
 
@@ -41,44 +41,43 @@ def _stop():
     GPIO.output(HONEY_REV_PWM, GPIO.LOW)
 
 
-def _run_forward(duration: float):
-    print("RUN FORWARD")
+def _run_forward(seconds: float):
+    print(f"RUN FORWARD {seconds:.2f}s")
 
     GPIO.output(HONEY_REV_PWM, GPIO.LOW)
     GPIO.output(HONEY_FWD_PWM, GPIO.HIGH)
 
-    time.sleep(duration)
+    time.sleep(seconds)
     _stop()
 
 
-def _run_reverse(duration: float):
-    print("RUN REVERSE")
+def _run_reverse(seconds: float):
+    print(f"RUN REVERSE {seconds:.2f}s")
 
     GPIO.output(HONEY_FWD_PWM, GPIO.LOW)
     GPIO.output(HONEY_REV_PWM, GPIO.HIGH)
 
-    time.sleep(duration)
+    time.sleep(seconds)
     _stop()
 
 
-def push_honey_ml(ml: float) -> bool:
+# ------------------------
+# Seconds-based primitives
+# ------------------------
+
+def push_honey_seconds(seconds: float) -> bool:
     global _last_push_time
 
     now = time.time()
 
-    if ml <= 0 or ml > MAX_ML_PER_COMMAND:
+    if seconds <= 0 or seconds > MAX_DURATION_SECONDS:
         return False
 
     if now - _last_push_time < MIN_INTERVAL_SECONDS:
         return False
 
-    duration = ml / ML_PER_SECOND
-
-    if duration > MAX_DURATION_SECONDS:
-        return False
-
     try:
-        _run_forward(duration)
+        _run_forward(seconds)
         _last_push_time = time.time()
         return True
     except Exception:
@@ -96,3 +95,23 @@ def retract_seconds(seconds: float) -> bool:
     except Exception:
         _stop()
         raise
+
+
+# ------------------------
+# ML interface (derived)
+# ------------------------
+
+def push_honey_ml(ml: float) -> bool:
+    if ml <= 0 or ml > MAX_ML_PER_COMMAND:
+        return False
+
+    seconds = ml / ML_PER_SECOND
+    return push_honey_seconds(seconds)
+
+
+def retract_ml(ml: float) -> bool:
+    if ml <= 0 or ml > MAX_ML_PER_COMMAND:
+        return False
+
+    seconds = ml / ML_PER_SECOND
+    return retract_seconds(seconds)
