@@ -8,30 +8,6 @@ import traceback
 
 from datetime import datetime
 
-def build_status():
-    """
-    Centralized system status report.
-    Later this will pull real telemetry.
-    """
-
-    # placeholders until wired to real telemetry
-    glucose = "unknown"
-    slope = "unknown"
-    protocol_state = "idle"
-
-    honey_ready = True
-    kibble_ready = True
-
-    return (
-        "BCS STATUS\n\n"
-        f"glucose: {glucose}\n"
-        f"slope: {slope}\n"
-        f"protocol: {protocol_state}\n\n"
-        f"honey driver: {'ready' if honey_ready else 'busy'}\n"
-        f"kibble driver: {'ready' if kibble_ready else 'busy'}\n"
-        f"time: {datetime.utcnow().isoformat()}Z"
-    )
-
 
 # ---- load env ----
 load_dotenv()
@@ -46,6 +22,8 @@ if not BOT_TOKEN:
 from bennycaresystem.drivers.webcam_util import capture_snapshot
 from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
 from bennycaresystem.drivers.honey_driver import push_honey_ml, retract_seconds, push_honey_g
+from bennycaresystem.status.status_builder import build_status
+
 
 # ---- discord setup ----
 intents = discord.Intents.default()
@@ -81,6 +59,15 @@ async def handle_snapshot(message: discord.Message):
         except OSError:
             pass
 
+async def handle_status(message: discord.Message):
+
+    status_text = build_status(
+        honey_lock,
+        kibble_lock,
+        camera_lock
+    )
+
+    await message.channel.send(f"```\n{status_text}\n```")
 
 async def handle_honey(message: discord.Message, parts):
     if len(parts) != 2:
@@ -191,6 +178,16 @@ async def on_message(message: discord.Message):
         await handle_retract(message, parts)
     elif parts[0] == "!honeyg":
         await handle_honeyg(message, parts)
+    elif parts[0] == "!status":
+        status_text = build_status(
+            honey_lock,
+            kibble_lock,
+            camera_lock
+        )
+
+        await message.channel.send(
+            f"```\n{status_text}\n```"
+        )
 
 
 
