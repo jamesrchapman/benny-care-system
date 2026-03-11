@@ -26,7 +26,11 @@ def capture_snapshot() -> str:
     result = subprocess.run(cmd, capture_output=True)
 
     if result.returncode != 0:
-        print("ffmpeg returned:", result.returncode)
+        print(
+            "ffmpeg warning:",
+            result.returncode,
+            result.stderr.decode(errors="ignore")[:200]
+        )
 
     for _ in range(10):
         if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
