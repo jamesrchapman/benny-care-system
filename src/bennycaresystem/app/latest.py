@@ -69,14 +69,7 @@ RESCUE_CHANNEL_ID = int(os.getenv("RESCUE_CHANNEL_ID", "0"))  # optional
 async def handle_snapshot(message: discord.Message):
     async with camera_lock:
         loop = asyncio.get_running_loop()
-        try:
-            path = await loop.run_in_executor(None, capture_snapshot)
-        except Exception as e:
-            traceback.print_exc()
-            await message.channel.send(
-                f"📷 snapshot error: {type(e).__name__}: {e}"
-            )
-            return
+        path = await loop.run_in_executor(None, capture_snapshot)
 
     try:
         await message.channel.send(
