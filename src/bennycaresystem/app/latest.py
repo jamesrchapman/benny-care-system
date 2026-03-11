@@ -170,6 +170,8 @@ async def handle_retract(message: discord.Message, parts):
 # ---- MESSAGE TRIGGER ----
 @bot.event
 async def on_message(message: discord.Message):
+    print("MESSAGE EVENT", message.id, message.content)
+    
     if message.author == bot.user:
         return
 
