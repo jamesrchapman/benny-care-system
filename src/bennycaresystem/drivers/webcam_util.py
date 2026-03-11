@@ -10,6 +10,8 @@ FFMPEG = "/usr/bin/ffmpeg"
 def capture_snapshot() -> str:
     ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
     out_path = f"/tmp/snapshot_{ts}_{uuid.uuid4().hex}.jpg"
+    import inspect
+    print("webcam_util file:", inspect.getfile(capture_snapshot))
 
     cmd = [
         FFMPEG,
