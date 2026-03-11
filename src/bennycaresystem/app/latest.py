@@ -37,6 +37,8 @@ def build_status():
 load_dotenv()
 BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
+
+
 if not BOT_TOKEN:
     raise RuntimeError("DISCORD_BOT_TOKEN not set")
 

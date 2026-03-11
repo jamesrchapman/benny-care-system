@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 import uuid
 
-
 WEBCAM_DEVICE = "/dev/video0"
 FFMPEG = "/usr/bin/ffmpeg"
 
@@ -13,12 +12,13 @@ def capture_snapshot() -> str:
     Returns the file path.
     Raises RuntimeError on failure.
     """
+
     ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
     out_path = f"/tmp/snapshot_{ts}_{uuid.uuid4().hex}.jpg"
 
     cmd = [
         FFMPEG,
-        "-loglevel", "error",      # quiet unless something breaks
+        "-loglevel", "error",
         "-f", "v4l2",
         "-input_format", "mjpeg",
         "-video_size", "640x480",
@@ -28,9 +28,12 @@ def capture_snapshot() -> str:
         out_path,
     ]
 
-    subprocess.run(cmd, check=True)
+    result = subprocess.run(cmd, capture_output=True)
 
-    if not os.path.exists(out_path):
+    if result.returncode != 0:
+        print("ffmpeg returned:", result.returncode)
+
+    if not os.path.exists(out_path) or os.path.getsize(out_path) == 0:
         raise RuntimeError("USB webcam snapshot not created")
 
     return out_path
