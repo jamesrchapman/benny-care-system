@@ -1,7 +1,7 @@
 import os
 import asyncio
 import discord
-from discord import app_commands
+# from discord import app_commands - allegedly unneeded.
 from dotenv import load_dotenv
 import traceback
 
@@ -52,7 +52,7 @@ from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
 intents = discord.Intents.default()
 intents.message_content = True
 bot = discord.Client(intents=intents)
-tree = app_commands.CommandTree(bot)
+# tree = app_commands.CommandTree(bot) - test remove
 
 # ---- prevent overlapping  runs ----
 servo_lock = asyncio.Lock()
@@ -179,10 +179,10 @@ async def on_message(message: discord.Message):
     content = (message.content or "").strip().lower()
     parts = content.split()
 
-    if content in ("!snapshot", "snapshot"):
+    if content == "!snapshot":
         await handle_snapshot(message)
 
-    elif content in ("!rescue", "rescue"):
+    elif content == "!rescue":
         await handle_rescue(message)
 
     elif parts[0] == "!honey":
@@ -194,57 +194,9 @@ async def on_message(message: discord.Message):
     elif parts[0] == "!retract":
         await handle_retract(message, parts)
 
-# ---- slash command ----
-@tree.command(name="rescue", description="Run the rescue servo once.")
-async def rescue_cmd(interaction: discord.Interaction):
-    await interaction.response.defer(thinking=True)
-
-    async with servo_lock:
-        loop = asyncio.get_running_loop()
-        try:
-            # run blocking GPIO code off the event loop
-            result = await loop.run_in_executor(None, servo_rotate_once)
-        except Exception as e:
-            await interaction.followup.send(f"servo error: {type(e).__name__}: {e}")
-            return
-
-    # treat None as success
-    if result is None or result is True:
-        await interaction.followup.send("✅ rescue executed")
-    else:
-        await interaction.followup.send("⚠️ rescue reported failure")
-
-@tree.command(name="snapshot", description="Capture an image from the Pi camera.")
-async def snapshot_cmd(interaction: discord.Interaction):
-    await interaction.response.defer(thinking=True)
-
-    async with camera_lock:
-        loop = asyncio.get_running_loop()
-        try:
-            path = await loop.run_in_executor(None, capture_snapshot)
-        except Exception as e:
-            await interaction.followup.send(f"📷 snapshot error: {type(e).__name__}: {e}")
-            return
-        
-
-    try:
-        await interaction.followup.send(
-            content="📷 snapshot captured",
-            file=discord.File(path)
-        )
-    finally:
-        try:
-            os.remove(path)
-        except OSError:
-            pass
 
 
 # ---- lifecycle ----
-@bot.event
-async def setup_hook():
-    await tree.sync()
-    print("slash commands synced")
-
 
 @bot.event
 async def on_ready():
