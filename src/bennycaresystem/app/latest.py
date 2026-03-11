@@ -171,8 +171,8 @@ async def handle_retract(message: discord.Message, parts):
 @bot.event
 async def on_message(message: discord.Message):
     print("MESSAGE EVENT", message.id, message.content)
-    
-    if message.author == bot.user:
+
+    if message.author.bot:
         return
 
     if RESCUE_CHANNEL_ID and message.channel.id != RESCUE_CHANNEL_ID:
