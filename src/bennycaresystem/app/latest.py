@@ -43,10 +43,9 @@ if not BOT_TOKEN:
     raise RuntimeError("DISCORD_BOT_TOKEN not set")
 
 # ---- import hardware action ----
-from bennycaresystem.drivers.servo_util import servo_rotate_once
 from bennycaresystem.drivers.webcam_util import capture_snapshot
-from bennycaresystem.drivers.honey_driver import push_honey_ml, retract_seconds
 from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
+from bennycaresystem.drivers.honey_driver import push_honey_ml, retract_seconds, push_honey_g
 
 # ---- discord setup ----
 intents = discord.Intents.default()
@@ -81,21 +80,6 @@ async def handle_snapshot(message: discord.Message):
             os.remove(path)
         except OSError:
             pass
-
-
-async def handle_rescue(message: discord.Message):
-    async with servo_lock:
-        loop = asyncio.get_running_loop()
-        try:
-            result = await loop.run_in_executor(None, servo_rotate_once)
-        except Exception as e:
-            await message.channel.send(f"servo error: {type(e).__name__}: {e}")
-            return
-
-    if result is None or result is True:
-        await message.channel.send("✅ rescue executed")
-    else:
-        await message.channel.send("⚠️ rescue reported failure")
 
 
 async def handle_honey(message: discord.Message, parts):
@@ -160,6 +144,26 @@ async def handle_retract(message: discord.Message, parts):
     else:
         await message.channel.send("⚠️ retract rejected")
 
+async def handle_honeyg(message: discord.Message, parts):
+    if len(parts) != 2:
+        await message.channel.send("usage: !honeyg <grams>")
+        return
+
+    try:
+        grams = float(parts[1])
+    except ValueError:
+        await message.channel.send("invalid gram value")
+        return
+
+    async with honey_lock:
+        loop = asyncio.get_running_loop()
+        result = await loop.run_in_executor(None, push_honey_g, grams)
+
+    if result:
+        await message.channel.send(f"🍯 pushed {grams} g honey")
+    else:
+        await message.channel.send("⚠️ honey push rejected or failed")
+
 # ---- MESSAGE TRIGGER ----
 @bot.event
 async def on_message(message: discord.Message):
@@ -176,10 +180,7 @@ async def on_message(message: discord.Message):
 
     if content == "!snapshot":
         await handle_snapshot(message)
-
-    elif content == "!rescue":
-        await handle_rescue(message)
-
+    
     elif parts[0] == "!honey":
         await handle_honey(message, parts)
 
@@ -188,6 +189,8 @@ async def on_message(message: discord.Message):
 
     elif parts[0] == "!retract":
         await handle_retract(message, parts)
+    elif parts[0] == "!honeyg":
+        await handle_honeyg(message, parts)
 
 
 

@@ -14,6 +14,9 @@ MAX_ML_PER_COMMAND = 20.0
 MAX_DURATION_SECONDS = 15
 MIN_INTERVAL_SECONDS = 0
 
+HONEY_G_PER_ML = 1.42
+MAX_G_PER_COMMAND = MAX_ML_PER_COMMAND * HONEY_G_PER_ML
+
 _last_push_time = 0
 
 
@@ -115,3 +118,22 @@ def retract_ml(ml: float) -> bool:
 
     seconds = ml / ML_PER_SECOND
     return retract_seconds(seconds)
+
+
+# ------------------------
+# G interface (derived)
+# ------------------------
+
+def push_honey_g(g: float) -> bool:
+    if g <= 0 or g > MAX_G_PER_COMMAND:
+        return False
+
+    ml = g / HONEY_G_PER_ML
+    return push_honey_ml(ml)
+
+def retract_g(g: float) -> bool:
+    if g <= 0 or g > MAX_G_PER_COMMAND:
+        return False
+
+    ml = g / HONEY_G_PER_ML
+    return retract_ml(ml)
