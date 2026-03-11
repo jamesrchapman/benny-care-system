@@ -30,24 +30,20 @@ def capture_snapshot() -> str:
 
         result = subprocess.run(cmd, capture_output=True)
 
-        # give filesystem a moment
+        # filesystem lag buffer
         for _ in range(10):
             if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
                 return out_path
             time.sleep(0.05)
 
+        # log but ignore errors during retries
         stderr = result.stderr.decode(errors="ignore")
 
-        if "Device or resource busy" in stderr:
-            time.sleep(0.25)
-            continue
+        print(f"snapshot attempt {attempt+1} failed:",
+            result.returncode,
+            stderr[:120])
 
-        break
+        time.sleep(0.25)
 
-    print(
-        "snapshot failure:",
-        result.returncode,
-        stderr[:200]
-    )
 
     raise RuntimeError("USB webcam snapshot not created")
