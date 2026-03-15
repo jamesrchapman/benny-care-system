@@ -108,9 +108,6 @@ journalctl -u bennycareserver.service -n 60 --no-pager
 71. Let's look at the dev.md for testing and redundancy criteria - should help other projects as well
 72. Fix up this Document
 
-
-
-
 ### Server Driver
 
 23
