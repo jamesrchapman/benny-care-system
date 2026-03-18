@@ -21,6 +21,7 @@ if not BOT_TOKEN:
 # ---- import hardware action ----
 from bennycaresystem.drivers.webcam_util import capture_snapshot
 from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
+from bennycaresystem.drivers.kibble_audio_driver import play_kibble_shake
 from bennycaresystem.drivers.honey_driver import (
     push_honey_ml,
     push_honey_g,
@@ -41,6 +42,7 @@ servo_lock = asyncio.Lock()
 camera_lock = asyncio.Lock()
 honey_lock = asyncio.Lock()
 kibble_lock = asyncio.Lock()
+audio_lock = asyncio.Lock()
 
 RESCUE_CHANNEL_ID = int(os.getenv("RESCUE_CHANNEL_ID", "0"))  # optional
 
@@ -63,6 +65,16 @@ async def handle_snapshot(message: discord.Message):
             os.remove(path)
         except OSError:
             pass
+
+async def handle_kibble_sound(message: discord.Message):
+    async with audio_lock:
+        loop = asyncio.get_running_loop()
+        result = await loop.run_in_executor(None, play_kibble_shake)
+
+    if result:
+        await message.channel.send("🔊 kibble shake")
+    else:
+        await message.channel.send("⚠️ audio failed")
 
 async def handle_status(message: discord.Message):
 
@@ -192,6 +204,9 @@ async def on_message(message: discord.Message):
 
     if content == "!snapshot":
         await handle_snapshot(message)
+
+    elif content == "!kibblesound":
+        await handle_kibble_sound(message)
     
     elif parts[0] == "!honey":
         await handle_honey(message, parts)
@@ -204,7 +219,7 @@ async def on_message(message: discord.Message):
 
     elif parts[0] == "!retractg":
         await handle_retractg(message, parts)
-        
+
     elif parts[0] == "!honeyg":
         await handle_honeyg(message, parts)
     elif parts[0] == "!status":
