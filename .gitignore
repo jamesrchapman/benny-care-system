@@ -45,8 +45,6 @@ glucose_log.csv
 
 # Audio (if you're storing .wav files in source control, seek help)
 *.wav
-*.mp3
-!assets/kibble_shake.mp3
 *.flac
 *.ogg
 # Other
