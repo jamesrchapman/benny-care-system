@@ -31,7 +31,7 @@ def play_kibble_shake() -> bool:
                 "--no-video",
                 "--quiet",
                 "--ao=alsa",
-                "--audio-device=alsa/plughw:1,0",
+                "--audio-device=alsa/sysdefault:CARD=Headphones",
                 str(KIBBLE_SHAKE_PATH),
             ],
             timeout=MAX_PLAY_SECONDS,
