@@ -15,16 +15,23 @@ def _validate_file(path: Path):
 
 
 def play_kibble_shake() -> bool:
-    """
-    Plays kibble shake sound through system audio.
-    Blocking call. Returns True on success.
-    """
-
-    _validate_file(KIBBLE_SHAKE_PATH)
+    if not KIBBLE_SHAKE_PATH.exists():
+        print(f"[AUDIO ERROR] missing file: {KIBBLE_SHAKE_PATH}")
+        return False
 
     try:
-        # --no-video: audio only
-        # --quiet: suppress spam
+        # --- hardening: ensure volume + routing ---
+        subprocess.run(
+            ["/usr/bin/amixer", "set", "Master", "80%"],
+            check=False,
+        )
+
+        subprocess.run(
+            ["/usr/bin/amixer", "cset", "numid=3", "1"],
+            check=False,
+        )
+
+        # --- actual playback ---
         subprocess.run(
             [
                 "/usr/bin/mpv",
