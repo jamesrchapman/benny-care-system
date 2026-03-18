@@ -27,14 +27,17 @@ def play_kibble_shake() -> bool:
         # --quiet: suppress spam
         subprocess.run(
             [
-                "mpv",
+                "/usr/bin/mpv",
                 "--no-video",
                 "--quiet",
+                "--ao=alsa",
+                "--audio-device=alsa/plughw:1,0",
                 str(KIBBLE_SHAKE_PATH),
             ],
             timeout=MAX_PLAY_SECONDS,
             check=True,
         )
+
         return True
 
     except subprocess.TimeoutExpired:
