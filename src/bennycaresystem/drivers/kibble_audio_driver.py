@@ -3,7 +3,8 @@ from pathlib import Path
 
 print("=== Kibble audio driver loaded ===")
 
-ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+ASSETS_DIR = PROJECT_ROOT / "assets"
 KIBBLE_SHAKE_PATH = ASSETS_DIR / "kibble_shake.m4a"
 
 MAX_PLAY_SECONDS = 10
