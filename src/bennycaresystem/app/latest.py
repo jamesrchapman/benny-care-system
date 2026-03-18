@@ -21,7 +21,12 @@ if not BOT_TOKEN:
 # ---- import hardware action ----
 from bennycaresystem.drivers.webcam_util import capture_snapshot
 from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
-from bennycaresystem.drivers.honey_driver import push_honey_ml, retract_seconds, push_honey_g
+from bennycaresystem.drivers.honey_driver import (
+    push_honey_ml,
+    push_honey_g,
+    retract_ml,
+    retract_g,
+)
 from bennycaresystem.status.status_builder import build_status
 
 
@@ -113,21 +118,41 @@ async def handle_kibble(message: discord.Message, parts):
 
 async def handle_retract(message: discord.Message, parts):
     if len(parts) != 2:
-        await message.channel.send("usage: !retract <seconds>")
+        await message.channel.send("usage: !retract <ml>")
         return
 
     try:
-        sec = float(parts[1])
+        ml = float(parts[1])
     except ValueError:
-        await message.channel.send("invalid seconds")
+        await message.channel.send("invalid ml value")
         return
 
     async with honey_lock:
         loop = asyncio.get_running_loop()
-        result = await loop.run_in_executor(None, retract_seconds, sec)
+        result = await loop.run_in_executor(None, retract_ml, ml)
 
     if result:
-        await message.channel.send(f"↩️ retracted for {sec} seconds")
+        await message.channel.send(f"↩️ retracted {ml} mL")
+    else:
+        await message.channel.send("⚠️ retract rejected")
+
+async def handle_retractg(message: discord.Message, parts):
+    if len(parts) != 2:
+        await message.channel.send("usage: !retractg <grams>")
+        return
+
+    try:
+        grams = float(parts[1])
+    except ValueError:
+        await message.channel.send("invalid gram value")
+        return
+
+    async with honey_lock:
+        loop = asyncio.get_running_loop()
+        result = await loop.run_in_executor(None, retract_g, grams)
+
+    if result:
+        await message.channel.send(f"↩️ retracted {grams} g honey")
     else:
         await message.channel.send("⚠️ retract rejected")
 
@@ -176,6 +201,10 @@ async def on_message(message: discord.Message):
 
     elif parts[0] == "!retract":
         await handle_retract(message, parts)
+
+    elif parts[0] == "!retractg":
+        await handle_retractg(message, parts)
+        
     elif parts[0] == "!honeyg":
         await handle_honeyg(message, parts)
     elif parts[0] == "!status":
