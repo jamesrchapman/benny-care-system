@@ -4,7 +4,7 @@ from pathlib import Path
 print("=== Kibble audio driver loaded ===")
 
 ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
-KIBBLE_SHAKE_PATH = ASSETS_DIR / "kibble_shake.m4a"
+KIBBLE_SHAKE_PATH = ASSETS_DIR / "kibble_shake.mp3"
 
 MAX_PLAY_SECONDS = 10
 
