@@ -1,19 +1,12 @@
 import os
 import asyncio
 import discord
-# from discord import app_commands - allegedly unneeded.
 from dotenv import load_dotenv
-import traceback
-
-
-from datetime import datetime
 
 
 # ---- load env ----
 load_dotenv()
 BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-
-
 
 if not BOT_TOKEN:
     raise RuntimeError("DISCORD_BOT_TOKEN not set")
@@ -21,7 +14,11 @@ if not BOT_TOKEN:
 # ---- import hardware action ----
 from bennycaresystem.drivers.webcam_util import capture_snapshot
 from bennycaresystem.drivers.kibble_driver import drop_kibble_bins
-from bennycaresystem.drivers.kibble_audio_driver import play_kibble_shake
+from bennycaresystem.drivers.kibble_audio_driver import (
+    play_kibble_shake,
+    play_emergency_wakeup,
+    play_benny_lets_eat,
+)
 from bennycaresystem.drivers.honey_driver import (
     push_honey_ml,
     push_honey_g,
@@ -35,17 +32,14 @@ from bennycaresystem.status.status_builder import build_status
 intents = discord.Intents.default()
 intents.message_content = True
 bot = discord.Client(intents=intents)
-# tree = app_commands.CommandTree(bot) - test remove
 
-# ---- prevent overlapping  runs ----
-servo_lock = asyncio.Lock()
+# ---- prevent overlapping runs ----
 camera_lock = asyncio.Lock()
 honey_lock = asyncio.Lock()
 kibble_lock = asyncio.Lock()
 audio_lock = asyncio.Lock()
 
 RESCUE_CHANNEL_ID = int(os.getenv("RESCUE_CHANNEL_ID", "0"))  # optional
-
 
 
 # ---- handler functions ----
@@ -58,7 +52,7 @@ async def handle_snapshot(message: discord.Message):
     try:
         await message.channel.send(
             content="📷 snapshot captured",
-            file=discord.File(path)
+            file=discord.File(path),
         )
     finally:
         try:
@@ -66,25 +60,30 @@ async def handle_snapshot(message: discord.Message):
         except OSError:
             pass
 
-async def handle_kibble_sound(message: discord.Message):
+
+async def handle_audio(
+    message: discord.Message,
+    playback_fn,
+    success_message: str,
+):
     async with audio_lock:
         loop = asyncio.get_running_loop()
-        result = await loop.run_in_executor(None, play_kibble_shake)
+        result = await loop.run_in_executor(None, playback_fn)
 
     if result:
-        await message.channel.send("🔊 kibble shake")
+        await message.channel.send(success_message)
     else:
         await message.channel.send("⚠️ audio failed")
 
-async def handle_status(message: discord.Message):
 
+async def handle_status(message: discord.Message):
     status_text = build_status(
         honey_lock,
         kibble_lock,
-        camera_lock
+        camera_lock,
     )
-
     await message.channel.send(f"```\n{status_text}\n```")
+
 
 async def handle_honey(message: discord.Message, parts):
     if len(parts) != 2:
@@ -148,6 +147,7 @@ async def handle_retract(message: discord.Message, parts):
     else:
         await message.channel.send("⚠️ retract rejected")
 
+
 async def handle_retractg(message: discord.Message, parts):
     if len(parts) != 2:
         await message.channel.send("usage: !retractg <grams>")
@@ -167,6 +167,7 @@ async def handle_retractg(message: discord.Message, parts):
         await message.channel.send(f"↩️ retracted {grams} g honey")
     else:
         await message.channel.send("⚠️ retract rejected")
+
 
 async def handle_honeyg(message: discord.Message, parts):
     if len(parts) != 2:
@@ -188,6 +189,7 @@ async def handle_honeyg(message: discord.Message, parts):
     else:
         await message.channel.send("⚠️ honey push rejected or failed")
 
+
 # ---- MESSAGE TRIGGER ----
 @bot.event
 async def on_message(message: discord.Message):
@@ -202,37 +204,52 @@ async def on_message(message: discord.Message):
     content = (message.content or "").strip().lower()
     parts = content.split()
 
-    if content == "!snapshot":
+    if not parts:
+        return
+
+    command = parts[0]
+
+    if command == "!snapshot":
         await handle_snapshot(message)
 
-    elif content == "!kibblesound":
-        await handle_kibble_sound(message)
-    
-    elif parts[0] == "!honey":
+    elif command in ("!kibblesound", "!shake"):
+        await handle_audio(
+            message,
+            play_kibble_shake,
+            "🔊 kibble shake",
+        )
+
+    elif command in ("!letseat", "!eatcall"):
+        await handle_audio(
+            message,
+            play_benny_lets_eat,
+            "🔊 Benny, let's eat",
+        )
+
+    elif command in ("!emergencywakeup", "!wakeup"):
+        await handle_audio(
+            message,
+            play_emergency_wakeup,
+            "🚨 emergency wakeup audio",
+        )
+
+    elif command == "!honey":
         await handle_honey(message, parts)
 
-    elif parts[0] == "!kibble":
+    elif command == "!kibble":
         await handle_kibble(message, parts)
 
-    elif parts[0] == "!retract":
+    elif command == "!retract":
         await handle_retract(message, parts)
 
-    elif parts[0] == "!retractg":
+    elif command == "!retractg":
         await handle_retractg(message, parts)
 
-    elif parts[0] == "!honeyg":
+    elif command == "!honeyg":
         await handle_honeyg(message, parts)
-    elif parts[0] == "!status":
-        status_text = build_status(
-            honey_lock,
-            kibble_lock,
-            camera_lock
-        )
 
-        await message.channel.send(
-            f"```\n{status_text}\n```"
-        )
-
+    elif command == "!status":
+        await handle_status(message)
 
 
 # ---- lifecycle ----
@@ -246,6 +263,7 @@ async def on_ready():
         if channel:
             asyncio.create_task(shadow_protocol_loop(channel))
 
+
 # ---- shadow mode hook for autoprotocols ----
 
 async def shadow_protocol_loop(channel):
@@ -253,9 +271,7 @@ async def shadow_protocol_loop(channel):
     Watches glucose stream and reports what the protocol
     *would* do without executing actuators.
     """
-
     while True:
-
         await asyncio.sleep(60)
 
         # placeholder
@@ -266,6 +282,7 @@ async def shadow_protocol_loop(channel):
                 f"[BCS SHADOW]\n"
                 f"protocol would intervene: {decision}"
             )
+
 
 # ---- entry ----
 bot.run(BOT_TOKEN)
