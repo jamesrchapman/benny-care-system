@@ -1,70 +1,23 @@
-# Benny Care System – Metabolic Monitoring and Intervention Design Notes
+What do we need:
+Well we need access to the libre-linkup datastream
+We definitely need to maintain all that fucking data somewhere
+We need to record stuff like feeding, injecting, exercise, sunning
+We need glucose, we need deltas, we deltas over a 5-10 minute period
+We need to handle sensor errors and temporary loss of signal
+We need to be able to notify me, sometimes persistently and irritatingly, beyond "DO NOT DISTURB", and we need to intervene automaitcally if I do not or cannot respond.
+We need to know the time
+Let's also calculate a second derivative of glucose
 
-These notes summarize the major concepts discussed while designing the automated monitoring and feeding system for Benny. The goal is **safe autonomous supervision when Benny is unattended**, not perfect physiological modeling.
-
----
-
-# 1. System Goal
-
-The system is a **closed-loop supervisory controller** for a biological process.
-
-Its responsibilities are:
-
-1. Monitor glucose continuously.
-2. Estimate short-term metabolic behavior.
-3. Apply conservative safety rules when Benny is unattended.
-4. Notify the human operator before acting when possible.
-5. Intervene automatically if the operator does not respond.
-
-The system must prioritize **life safety over optimal metabolic control**.
-
----
-
-# 2. Observability Problem
-
-The key challenge is that the system does not directly observe the important physiological variables.
-
-Hidden variables include:
-
+Hidden variables:
 - insulin currently active in bloodstream
 - insulin remaining in the depot
 - rate of insulin release
-- carbohydrate absorption rate
+- carbohydrate absorption rate/curve
 - digestion timing
 - exercise effects
 - site variability
 - sensor artifacts
 
-Instead, the system only observes:
-
-- glucose readings
-- time history
-- feeding events
-- insulin events
-- behavior/activity signals (optional)
-
-This means the system must **infer hidden state from observed behavior**.
-
----
-
-# 3. Observed Signals
-
-The most useful signals from the glucose sensor are not just the raw value but its derivatives.
-
-Important observables:
-
-- glucose level
-- slope (rate of change)
-- acceleration (change in slope)
-
-Approximate calculations:
-
-```
-slope ≈ (G_now − G_10min_ago) / 10
-accel ≈ slope_now − slope_10min_ago
-```
-
-Interpretation:
 
 | Observation | Interpretation |
 |--------------|---------------|
@@ -73,25 +26,9 @@ Interpretation:
 | flat glucose | roughly balanced pressures |
 | high volatility | both sugar and insulin effects may be large |
 
----
-
-# 4. Net Metabolic Pressure
-
-Conceptually the system behaves like:
-
-```
 dG/dt ≈ sugar_pressure − insulin_pressure
-```
-
 But those pressures are hidden.
-
 The system only observes the **net result**.
-
----
-
-# 5. Metabolic Activity Level
-
-One critical insight from observation:
 
 Large swings tend to occur when **both insulin and sugar effects are high simultaneously**.
 
@@ -117,11 +54,6 @@ Direction determines slope.
 
 Activity determines volatility and sensitivity.
 
----
-
-# 6. Event-Based Physiology
-
-The system should track discrete metabolic events:
 
 ## Insulin Events
 ```
@@ -167,7 +99,11 @@ effective_insulin =
     × exercise_factor
 ```
 
-Carb effects are similar:
+-> Yeah so this is what chatgpt wrote, but... honestly I have the feeling that the gamma is pretty good. 
+the issue is that the gamma is like... there's some variability as to what kind of gamma you have, and then you have the ability to kinda "ride" the gamma, like speeding it up artificially you know? forcing it along in time a little faster, e.g. with exercise I think... and also if the depot kinda sits, you can get "stuck" on the gamma, where one process starts moving along without the rest. 
+Because of this, I'm inclined to do kind of a decomposed gamma, I think, where we pay some attention to the separate parameters. 
+
+Carb effects are probably gamma too, but they're typically very regular, maybe some dependence on GI state (e.g. is he sick)
 
 ```
 fast_carbs → honey
