@@ -12,6 +12,7 @@
   - Continuous honey column (no air gaps)
   - Syringe seated correctly in mount
   - Plunger aligned (not slipping or skewed)
+  - Tubing not kinked
 
 ### 3. Kibble
 - `drop 1`  
