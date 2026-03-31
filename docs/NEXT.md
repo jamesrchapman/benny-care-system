@@ -220,7 +220,8 @@ Okay other gripes
 - redundancy checking
 - failures I haven't thought of
 
-
-I definitely wouldn't mind more of an operator seat as like a phone app. 
+I definitely wouldn't mind more of an operator seat as like a phone app.
 
 oh I think I need like LED indicators for most of the electrical paths if that's possible. because like it would just be a lot easier to check shit like that right?
+
+Could definitely use proper end-caps for the honey syringes like a luer lock end cap
