@@ -1,26 +1,26 @@
 # Roughly Ordered
 
-## Life or Death
+## Harm within a couple days
 
 1. Restock Backpack
-2. Pick up New Libre (have two on hand)
-3. Order New Libre (have two on hand)
-4. Dog Water Refresh
+2. Dog Water Refresh
 
-## Injury / Harm / Shit going Wrong and Potentially being a big deal after repeated use
+## Harm within a couple weeks
 
-1. Benny Toenail Sanding
-2. Benny Paw Pad Trimming
-3. Brush Benny's Teeth
-4. Soak Benny's feet
-5. Benny Facial
-6. Benny Body Trim
-7. rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
-8. Maybe mounting *everything* on a common board/box so it's tidier/safer
-9. Rethinking the system knowing we need a human on call
-10. BCS Human Contingincies
+1. Pick up New Libre (have two on hand)
+2. Order New Libre (have two on hand)
+3. Benny Toenail Sanding
+4. Benny Paw Pad Trimming
+5. Brush Benny's Teeth
+6. Soak Benny's feet
+7. Benny Facial
+8. Benny Body Trim
+9. rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
+10. Maybe mounting *everything* on a common board/box so it's tidier/safer
+11. Rethinking the system knowing we need a human on call
+12. BCS Human Contingincies
 
-## Maybe a big deal after a while
+## Harm within a couple months
 
 1. Snapshot Debugging on the watch
    1. Looks like the hook doesn't run !snapshot it runs snapshot which doesn't do anything anymore
@@ -32,7 +32,7 @@
    2. Benny goes to eat the food
 3. Dogs getting into food early
 
-## Pretty low likelihood failure
+## Harm within a year
 
 1. autoprotocol modes and behaviors - these would be a pretty big help This would probably be a big deal for like my mental health, for Benny's care while I'm gone, his long-term care honestly, it would probably make better decisions than I would after just just I don't know a handful of refinements...
    1. Leaving Benny at Home (Mode)
@@ -43,12 +43,8 @@
    6. Recording Food
    7. A sophisticated auto-protocol that gives *me* decent advice when it's not in charge and does fine when it *is* in charge.
    8. Test the auto-protocol against a live stream
-
-
-## Kinda not that important
-
-1. Benny Urine Check
-2. Weigh Benny
+2. Benny Urine Check
+3. Weigh Benny
 
 ## Life Stuff
 
@@ -56,7 +52,7 @@
 2. Enjoy Benny Selfishly
 3. Talk to Benny
 
-## Sorta Fun/Relief
+## Sorta Fun/Relief/QOL
 
 1. I can't really do the cookie box because I don't know how to mount it so the dogs won't fuck it up
 2. Massive Watch software update
