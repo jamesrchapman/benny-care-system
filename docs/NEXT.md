@@ -5,8 +5,8 @@
 1. Restock Backpack
 2. Dog Water Refresh
 3. record keeping is important
-4. This thing should be prioritized
-5. Okay so there's ants
+4. Okay so there's ants
+5. Syringe Kinks
 6. Need anything that touches food to be washable
 7. Everything should be unpluggable. like nothing should be hardwired to anything UNLESS they NEVER need to be disconnected AND they're physically mounted together... which.. is not a terrible idea honestly.
 8. Alerts
@@ -21,7 +21,6 @@
 6. BCS is really scary and unpleasant to work on
 7. Maybe integrating the pre-check into discord or whatever service we interact with - just like "set up" and then we go through a process saying "done" and then checking that it works, etc.
 8. I should get those crimpy cold weld airless things for my wires
-
 9. Soak Benny's feet
 10. I mean, maybe we try to think of a more integrative BCS, right?
 11. The phone overheated
