@@ -1,39 +1,43 @@
 # Roughly Ordered
 
-## Harm within a couple days
+Repeated Care
 
 1. Restock Backpack
 2. Dog Water Refresh
-3. record keeping is important
-4. Okay so there's ants
-5. Syringe Kinks
-6. Need anything that touches food to be washable
-7. Everything should be unpluggable. like nothing should be hardwired to anything UNLESS they NEVER need to be disconnected AND they're physically mounted together... which.. is not a terrible idea honestly.
-8. Alerts
+3. Pick up New Libre (have two on hand)
+4. Order New Libre (have two on hand)
+5. Benny Toenail Sanding
+6. Benny Paw Pad Trimming
+7. Brush Benny's Teeth
+8. Soak Benny's feet
+9. Benny Facial
+10. Benny Body Trim
+11. Benny Urine Check
+12. Weigh Benny
+
+## Harm within a couple days
+
+1. record keeping is important
+2. Okay so there's ants
+3. Syringe Kinks
+4. Need anything that touches food to be washable
+5. Everything should be unpluggable. like nothing should be hardwired to anything UNLESS they NEVER need to be disconnected AND they're physically mounted together... which.. is not a terrible idea honestly.
+6. Alerts via pi Bluetooth
 
 ## Harm within a couple weeks
 
-1. Pick up New Libre (have two on hand)
-2. Order New Libre (have two on hand)
-3. Benny Toenail Sanding
-4. Benny Paw Pad Trimming
-5. Brush Benny's Teeth
-6. BCS is really scary and unpleasant to work on
-7. Maybe integrating the pre-check into discord or whatever service we interact with - just like "set up" and then we go through a process saying "done" and then checking that it works, etc.
-8. I should get those crimpy cold weld airless things for my wires
-9. Soak Benny's feet
-10. I mean, maybe we try to think of a more integrative BCS, right?
-11. The phone overheated
-12. Benny Facial
-13. oh I think I need like LED indicators for most of the electrical paths if that's possible. because like it would just be a lot easier to check shit like that right?
-14. Benny Body Trim
-15. rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
-16. Maybe mounting *everything* on a common board/box so it's tidier/safer
-17. Rethinking the system knowing we need a human on call
-18. Could definitely use proper end-caps for the honey syringes like a luer lock end cap
-19. BCS Human Contingincies
-20. Get a much larger housing box and a standoff/mounting kit
-21. Also - How do I get a human on call?
+1. BCS is really scary and unpleasant to work on
+2. Maybe integrating the pre-check into discord or whatever service we interact with - just like "set up" and then we go through a process saying "done" and then checking that it works, etc.
+3. I mean, maybe we try to think of a more integrative BCS, right?
+4. The phone overheated
+5. oh I think I need like LED indicators for most of the electrical paths if that's possible. because like it would just be a lot easier to check shit like that right?
+6. rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
+7. Maybe mounting *everything* on a common board/box so it's tidier/safer
+8. Rethinking the system knowing we need a human on call
+9. Could definitely use proper end-caps for the honey syringes like a luer lock end cap
+10. BCS Human Contingincies
+11. Get a much larger housing box and a standoff/mounting kit
+12. Also - How do I get a human on call?
    Light so you can see better from the camera
    Okay cool, what does benny need rn -
    well there's the bcs
@@ -42,9 +46,9 @@
    Oh finding a job where Benny can be (that's kinda tricky!)
    idk some comfort type stuff. like maybe we could get a softer mat to stick outside in the sun or...
    Yeah this is all a little more comprehensive.
-22. Default Rescue Mode
+13. Default Rescue Mode
     1. Regardless of what fails or how, default to feeding food/rescue reiably.
-23. Server LLU Subversion BLE Direct Hack
+14. Server LLU Subversion BLE Direct Hack
 
 ## Harm within a couple months
 
@@ -76,11 +80,10 @@
    6. Recording Food
    7. A sophisticated auto-protocol that gives *me* decent advice when it's not in charge and does fine when it *is* in charge.
    8. Test the auto-protocol against a live stream
-2. Benny Urine Check
-3. Weigh Benny
-4. I definitely wouldn't mind more of an operator seat as like a phone app.
-5. Test whether home internet continues running during power outage on UPS
-6. I can't really do the cookie box because I don't know how to mount it so the dogs won't fuck it up
+
+2. I definitely wouldn't mind more of an operator seat as like a phone app.
+3. Test whether home internet continues running during power outage on UPS
+4. I can't really do the cookie box because I don't know how to mount it so the dogs won't fuck it up
 
 ## Positive Life Stuff
 
