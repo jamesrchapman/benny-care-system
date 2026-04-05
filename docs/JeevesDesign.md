@@ -1,0 +1,20 @@
+
+- Know my Schedule/Planned Schedule
+- Dispense Food by planned amount on schedule (and I'll give it manually)
+- Know a few different routines:
+  - e.g. if I have work in the evening how do we change the plan
+  - If I have an appointment at a shot time and we shift a shot, how does that change things
+- Alerts based on schedule
+- Store my activities
+- Store Libre Data
+- Data Visualization
+- Abnormality Alerts (falling too hard, not falling hard at all)
+- Advanced Predictive Model
+- Set Up Command + Checklist for leaving it alone
+- How can it help me with record keeping
+- Recording more audio clips cajoling Benny to eat.
+- Calling for On-Call Help
+- Automatically take and send pictures periodically around feedings
+- Record Keeping
+  - Remember the Schedule - ask me if/when I did things
+- Set up Bluetooth Backup Reader and redundant Alerts (if LLU doesn't have data for a while, but bluetooth *does*)
