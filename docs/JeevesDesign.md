@@ -1,5 +1,23 @@
 
-- Know my Schedule/Planned Schedule
+# some of these docs are pretty retarded
+
+## Here's what's actually next
+
+
+So we're definitely going to need a schedule, multiple schedules/routines to pick from, time push, aaaand
+
+dum dum dum dum....
+
+Oh we're going to need alerts and feedback
+
+starting to sound like it's outside the scope of discord?
+
+hm...
+
+
+
+
+ Know my Schedule/Planned Schedule
 - Dispense Food by planned amount on schedule (and I'll give it manually)
 - Know a few different routines:
   - e.g. if I have work in the evening how do we change the plan
