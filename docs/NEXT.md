@@ -2,7 +2,7 @@
 
 ## Really Important
 
-OH super important would be holding schedules/plans for different work days and weather and shit like that... like factoring in sun and that kinda thing.
+1. OH super important would be holding schedules/plans for different work days and weather and shit like that... like factoring in sun and that kinda thing.
 
 ## Kinda Important
 
@@ -11,65 +11,34 @@ OH super important would be holding schedules/plans for different work days and 
    1. Because of kinks
    2. Benny fucking with it
 3. audio verification when absent (more like a livestream or something if you want it)
+4. Making Precheck.md actually useful and more accessible
+5. putting everything in a box so benny can't unplug anything by hitting shit - need bigger panels
+6. Bluetooth Libre Hack Backup + Alerts
+7. Discord Record Keeping (e.g. maintain the schedule/routine, record any divergence from the plan or the planned treatment, food, sun, walking, play)
 
 ## Normal Stuff
 
 1. What else - toenail trimming is really hard
-2. putting everything in a box
-3. I'm also thinking like, it might do to have schedules be a little more visual (like having a banner for the time of like, benny lying in the sun, or benny walking, etc.
-4. Does the UPS Work at all
-5. Alerts via pi Bluetooth
+2. I'm also thinking like, it might do to have schedules be a little more visual (like having a banner for the time of like, benny lying in the sun, or benny walking, etc.
+3. Does the UPS Work at all
+4. Human Contingency Acquisition Planning
+   1. E.g. Moving into apartment complex and getting to know people
+5. Trying to get a job that lets me have Benny with me
+6. Setting up the watch app for the new shit
+7. Auto-Protocols, Rescue
+8. !snapshot sends old snapshots (on the watch)
+9. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 
 ## Not Very Important
 
 1. Working the ML time series stuff
 2. I dislike the name Solus. -shrug-
-3. Cookie Box to help avoid ants with a little less work
+3. Softer Outdoor Mat
+4. Softer Backyard Grass
+5. Some auto-webcam verification (honey worked, kibble worked, Benny came or not, the audio played audibly)
+6. Better lighting for the webcam
+7. Cookie Box to help avoid ants with a little less work
+8. Putting Pre-Check in Discord (like as a checklist)
+   1. You say "done"
 
 ## Unsorted
-
-Maybe integrating the pre-check into discord or whatever service we interact with - just like "set up" and then we go through a process saying "done" and then checking that it works, etc.
-oh I think I need like LED indicators for most of the electrical paths if that's possible. because like it would just be a lot easier to check shit like that right?
-rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
-Maybe mounting *everything* on a common board/box so it's tidier/safer
-Rethinking the system knowing we need a human on call
-Could definitely use proper end-caps for the honey syringes like a luer lock end cap
-BCS Human Contingincies
-Get a much larger housing box and a standoff/mounting kit
-Also - How do I get a human on call?
-Light so you can see better from the camera
-Okay cool, what does benny need rn -
-well there's the bcs
-there's finding someone to watch him/be on call about him.
-there's... huh. Idk what else there is.
-Oh finding a job where Benny can be (that's kinda tricky!)
-idk some comfort type stuff. like maybe we could get a softer mat to stick outside in the sun or...
-Yeah this is all a little more comprehensive.
-Default Rescue Mode
-Regardless of what fails or how, default to feeding food/rescue reiably.
-Server LLU Subversion BLE Direct Hack
-Snapshot Debugging on the watch
-Looks like the hook doesn't run !snapshot it runs snapshot which doesn't do anything anymore
-It also is happy to send me an old snapshot instead of indicating failure.
-so there's a silent failure with old snapshot.
-That's bad.
-Obviously the bluetooth pi reader is a good idea as well.
-Need Camera to Veify it's ***Benny*** who eats his food
-or verify kibble hits the bowl (not just manually)
-Benny goes to eat the food
-Dogs getting into food early
-Massive Watch software update
-New Functions
-New Interface
-descending tiles)
-
-1. It's really inconvenient leaving my cellphone at home - we could avoid 90% of the issues with the watch by simply getting another phone to leave with him
-autoprotocol modes and behaviors - these would be a pretty big help This would probably be a big deal for like my mental health, for Benny's care while I'm gone, his long-term care honestly, it would probably make better decisions than I would after just just I don't know a handful of refinements...
-Leaving Benny at Home (Mode)
-Benny and I are not at Home (Mode)
-I'm home (Mode)
-Recording Injections
-Recording Activity
-Recording Food
-A sophisticated auto-protocol that gives *me* decent advice when it's not in charge and does fine when it *is* in charge.
-Test the auto-protocol against a live stream
