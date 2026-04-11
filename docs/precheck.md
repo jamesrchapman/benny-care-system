@@ -39,3 +39,11 @@
 ### GO / NO-GO
 - **GO only if all checks are clean and unambiguous**
 - Any ambiguity = **NO-GO**
+
+
+
+This list kinda sucks dick
+
+Also make sure your phone alarms are off, especially ones that will go on forever if you're leaving it at home. 
+It would be good to run -5 g honey, +5 g honey, kibble 1 and recycle it, make a test audio to test 
+

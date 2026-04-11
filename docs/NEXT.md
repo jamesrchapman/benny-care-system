@@ -6,35 +6,29 @@ OH super important would be holding schedules/plans for different work days and 
 
 ## Kinda Important
 
-I want a webcam to watch benny sleep
-Better way to affix the honey syringe tubing - like 3d print something or run the tubing through the food box or something
-audio verification when absent (more like a livestream or something if you want it)
+1. I want a webcam to watch benny sleep
+2. Better way to affix the honey syringe tubing - like 3d print something or run the tubing through the food box or something
+   1. Because of kinks
+   2. Benny fucking with it
+3. audio verification when absent (more like a livestream or something if you want it)
 
 ## Normal Stuff
 
 1. What else - toenail trimming is really hard
-putting everything in a box
-I'm also thinking like, it might do to have schedules be a little more visual (like having a banner for the time of like, benny lying in the sun, or benny walking, etc.
-Does the UPS Work at all
+2. putting everything in a box
+3. I'm also thinking like, it might do to have schedules be a little more visual (like having a banner for the time of like, benny lying in the sun, or benny walking, etc.
+4. Does the UPS Work at all
+5. Alerts via pi Bluetooth
 
 ## Not Very Important
 
-Working the ML time series stuff
-
-I dislike the name Solus. -shrug-
-
-Cookie Box
+1. Working the ML time series stuff
+2. I dislike the name Solus. -shrug-
+3. Cookie Box to help avoid ants with a little less work
 
 ## Unsorted
 
-Syringe Kinks
-Need anything that touches food to be washable
-Everything should be unpluggable. like nothing should be hardwired to anything UNLESS they NEVER need to be disconnected AND they're physically mounted together... which.. is not a terrible idea honestly.
-Alerts via pi Bluetooth
-BCS is really scary and unpleasant to work on
 Maybe integrating the pre-check into discord or whatever service we interact with - just like "set up" and then we go through a process saying "done" and then checking that it works, etc.
-I mean, maybe we try to think of a more integrative BCS, right?
-The phone overheated
 oh I think I need like LED indicators for most of the electrical paths if that's possible. because like it would just be a lot easier to check shit like that right?
 rewiring/housing the wires for the BCS in such a way that they're like, safer, won't be pulled, etc.
 Maybe mounting *everything* on a common board/box so it's tidier/safer
