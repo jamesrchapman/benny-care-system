@@ -15,6 +15,7 @@
 5. putting everything in a box so benny can't unplug anything by hitting shit - need bigger panels
 6. Bluetooth Libre Hack Backup + Alerts
 7. Discord Record Keeping (e.g. maintain the schedule/routine, record any divergence from the plan or the planned treatment, food, sun, walking, play)
+8. Audio just to say Good boy benny, I love you so much. Good job buddy.
 
 ## Normal Stuff
 
