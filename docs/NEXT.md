@@ -6,16 +6,13 @@
 
 ## Kinda Important
 
-1. I want a webcam to watch benny sleep
-2. Better way to affix the honey syringe tubing - like 3d print something or run the tubing through the food box or something
-   1. Because of kinks
-   2. Benny fucking with it
-3. audio verification when absent (more like a livestream or something if you want it)
-4. Making Precheck.md actually useful and more accessible
-5. putting everything in a box so benny can't unplug anything by hitting shit - need bigger panels
-6. Bluetooth Libre Hack Backup + Alerts
-7. Discord Record Keeping (e.g. maintain the schedule/routine, record any divergence from the plan or the planned treatment, food, sun, walking, play)
-8. Audio just to say Good boy benny, I love you so much. Good job buddy.
+1. ~~I want a webcam to watch benny sleep~~ Birthday
+
+2. Making Precheck.md actually useful and more accessible
+3. putting everything in a box so benny can't unplug anything by hitting shit - need bigger panels
+4. Bluetooth Libre Hack Backup + Alerts
+5. Discord Record Keeping (e.g. maintain the schedule/routine, record any divergence from the plan or the planned treatment, food, sun, walking, play)
+6. Basically webcamming in and talking and seeing and listening
 
 ## Normal Stuff
 
@@ -29,6 +26,8 @@
 7. Auto-Protocols, Rescue
 8. !snapshot sends old snapshots (on the watch)
 9. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
+10. Benny Basket Backpack  
+    1.  Sketch Dog Backpack - Backpack Frame Split, bottom half is a bag you unzip and can store stuff inside, top half is a dog bed bottom on a plate with wicker sides and a wicker lid, with grommets for attaching a tarp, window facing backwards/sides - 1 hour - Go fishing way more often, do way more cool shit with Benny and save my arms/back
 
 ## Not Very Important
 
