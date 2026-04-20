@@ -193,12 +193,30 @@ async def handle_honeyg(message: discord.Message, parts):
 # ---- MESSAGE TRIGGER ----
 @bot.event
 async def on_message(message: discord.Message):
-    print("MESSAGE EVENT", message.id, message.content)
+    print(
+        "MESSAGE EVENT",
+        message.id,
+        repr(message.content),
+        "author=", message.author,
+        "author_id=", getattr(message.author, "id", None),
+        "author_bot=", getattr(message.author, "bot", None),
+        "webhook_id=", message.webhook_id,
+        "channel_id=", message.channel.id,
+    )
 
-    if message.author.bot:
+    # Ignore the BCS bot itself only.
+    if bot.user and message.author.id == bot.user.id:
         return
 
     if RESCUE_CHANNEL_ID and message.channel.id != RESCUE_CHANNEL_ID:
+        return
+
+    # Allow either:
+    # - normal human messages
+    # - webhook messages
+    #
+    # Reject other bot-authored traffic that is not a webhook.
+    if message.author.bot and message.webhook_id is None:
         return
 
     content = (message.content or "").strip().lower()
@@ -250,7 +268,6 @@ async def on_message(message: discord.Message):
 
     elif command == "!status":
         await handle_status(message)
-
 
 # ---- lifecycle ----
 
