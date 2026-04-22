@@ -24,9 +24,10 @@
 5. Trying to get a job that lets me have Benny with me
 6. Setting up the watch app for the new shit
 7. Auto-Protocols, Rescue
-8. !snapshot sends old snapshots (on the watch)
-9. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
-10. Benny Basket Backpack  
+8. And maybe creating a tiny battery powered insulin fridge...
+9. !snapshot sends old snapshots (on the watch)
+10. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
+11. Benny Basket Backpack  
     1. Sketch Dog Backpack - Backpack Frame Split, bottom half is a bag you unzip and can store stuff inside, top half is a dog bed bottom on a plate with wicker sides and a wicker lid, with grommets for attaching a tarp, window facing backwards/sides - 1 hour - Go fishing way more often, do way more cool shit with Benny and save my arms/back
 
 ## Not Very Important
