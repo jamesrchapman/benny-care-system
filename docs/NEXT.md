@@ -3,6 +3,38 @@
 ## Really Important
 
 1. OH super important would be holding schedules/plans for different work days and weather and shit like that... like factoring in sun and that kinda thing.
+2. There's really a few different projects in here - there's a benny tower, the watch interface for the tower, there's scheduling, and there's like scheduling... and maybe other stuff.
+
+Gotta order some sandpaper
+
+Cut and Place a support wedge for the BCS Bowl
+
+Plug in the BCS and put up some side-walls
+
+How could we make a cheaper / marketable tower?
+
+   Do one shopping-list / architecture pass for a cheaper BCS build - What's the total cost of materials?
+   Could I pay someone to do it somewhere else for cheaper and ship it to me?
+
+Center Benny's Schedule Around Food Intake
+
+Better Benny Records
+
+* How much food should he eat in a day?
+  * Weigh Him
+* Then figure out how much insulin to give him, when, and how much to feed him when to accomodate that.
+
+Variety of Benny Schedules for different work days / weather / sun*
+
+Record Keeping inside discord
+
+## BCS Watch App
+
+Make the watch app play sound
+
+## Dog Diabetes Education
+
+Dog Diabetes Tutorial / Videos
 
 ## Kinda Important
 
