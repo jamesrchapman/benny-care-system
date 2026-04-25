@@ -1,10 +1,5 @@
 # Roughly Ordered
 
-## Really Important
-
-1. OH super important would be holding schedules/plans for different work days and weather and shit like that... like factoring in sun and that kinda thing.
-2. There's really a few different projects in here - there's a benny tower, the watch interface for the tower, there's scheduling, and there's like scheduling... and maybe other stuff.
-
 Gotta order some sandpaper
 
 Cut and Place a support wedge for the BCS Bowl
