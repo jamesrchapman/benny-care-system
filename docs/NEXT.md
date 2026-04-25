@@ -1,27 +1,7 @@
 # Roughly Ordered
 
-How could we make a cheaper / marketable tower?
-   Do one shopping-list / architecture pass for a cheaper BCS build - What's the total cost of materials?
-   Could I pay someone to do it somewhere else for cheaper and ship it to me?
-
-Make the watch app play sound
-
-## Dog Diabetes Education
-
-Dog Diabetes Tutorial / Videos
-
-## Kinda Important
-
-1. ~~I want a webcam to watch benny sleep~~ Birthday
-
-2. Making Precheck.md actually useful and more accessible
-3. putting everything in a box so benny can't unplug anything by hitting shit - need bigger panels
-4. Basically webcamming in and talking and seeing and listening
-
-## Normal Stuff
-
-1. Auto-Protocols, Rescue
-2. And maybe creating a tiny battery powered insulin fridge...
+1. Basically webcamming in and talking and seeing and listening
+2. Auto-Protocols, Rescue
 3. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 
 ## Not Very Important
