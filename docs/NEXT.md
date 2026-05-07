@@ -70,17 +70,21 @@ Dog Diabetes Tutorial / Videos
 10. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 11. Benny Basket Backpack  
     1. Sketch Dog Backpack - Backpack Frame Split, bottom half is a bag you unzip and can store stuff inside, top half is a dog bed bottom on a plate with wicker sides and a wicker lid, with grommets for attaching a tarp, window facing backwards/sides - 1 hour - Go fishing way more often, do way more cool shit with Benny and save my arms/back
+1. Basically webcamming in and talking and seeing and listening
+2. Auto-Protocols, Rescue
+3. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 
 ## Not Very Important
 
 1. Working the ML time series stuff
-2. I dislike the name Solus. -shrug-
-3. Softer Outdoor Mat
-4. Softer Backyard Grass
-5. Some auto-webcam verification (honey worked, kibble worked, Benny came or not, the audio played audibly)
-6. Better lighting for the webcam
-7. Cookie Box to help avoid ants with a little less work
-8. Putting Pre-Check in Discord (like as a checklist)
+2. !snapshot sends old snapshots (on the watch)
+3. I dislike the name Solus. -shrug-
+4. Softer Outdoor Mat
+5. Softer Backyard Grass
+6. Some auto-webcam verification (honey worked, kibble worked, Benny came or not, the audio played audibly)
+7. Better lighting for the webcam
+8. Cookie Box to help avoid ants with a little less work
+9. Putting Pre-Check in Discord (like as a checklist)
    1. You say "done"
 
 ## Unsorted
