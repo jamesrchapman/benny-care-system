@@ -1,5 +1,14 @@
 # Roughly Ordered
 
+   1. Benny Bed Stream
+   2. Audio Stream (back and forth)
+   3. Secure the Syringe Tubing Better so it doesn't block the food out and gets dispersed into the food rather than in a puddle at the back
+   4. Auto-Protocol with Notification mode or Full-Auto Mode and you can set that in discord
+   5. LLU Data Pull to !status
+   6. LLU Data Pull Constantly
+   7. LLU Data Upload and Delete so we don't overwhelm the little pi
+   8. Sleeker Box Design - just a drawing and scheming, you don't have to do anything, it's really annoying actually changing the hardware and shit
+
 ## Really Important
 
 1. OH super important would be holding schedules/plans for different work days and weather and shit like that... like factoring in sun and that kinda thing.
