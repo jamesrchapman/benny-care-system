@@ -1,5 +1,7 @@
 # Roughly Ordered
 
+Syringe is 12mm to "20ml honey push" for adjustment
+
    1. Benny Bed Stream
    2. Audio Stream (back and forth)
    3. Secure the Syringe Tubing Better so it doesn't block the food out and gets dispersed into the food rather than in a puddle at the back
@@ -70,9 +72,9 @@ Dog Diabetes Tutorial / Videos
 10. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 11. Benny Basket Backpack  
     1. Sketch Dog Backpack - Backpack Frame Split, bottom half is a bag you unzip and can store stuff inside, top half is a dog bed bottom on a plate with wicker sides and a wicker lid, with grommets for attaching a tarp, window facing backwards/sides - 1 hour - Go fishing way more often, do way more cool shit with Benny and save my arms/back
-1. Basically webcamming in and talking and seeing and listening
-2. Auto-Protocols, Rescue
-3. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
+12. Basically webcamming in and talking and seeing and listening
+13. Auto-Protocols, Rescue
+14. Discord Anomaly Notifications and Alerts (reading LLU, comparing to schedule/routine/history - did something weird happen?)
 
 ## Not Very Important
 
